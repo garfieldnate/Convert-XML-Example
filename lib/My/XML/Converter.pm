@@ -1,4 +1,4 @@
-# ABSTRACT: LDS XML to ETAX converter
+# ABSTRACT: Example XML dialect converter
 package My::XML::Converter;
 use My::XML::Converter::Handlers;
 use strict;
@@ -97,3 +97,35 @@ sub convert {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+	My::XML::Converter- example package for converting between two XML dialects
+
+=head1 SYNOPSIS
+
+	my $converter = My::XML::Converter->new();
+	$self->input_fh('C:/path/to/input/XML/file');
+	$converter->output_fh('C:/path/to/print/main/to');
+	$converter->convert();
+	
+
+=head1 DESCRIPTION
+
+This module is meant to demonstrate one way to convert between different XML dialects. It uses XML::Twig, and contains a Test::Base-based test suite. The test suite has access to the handlers used by the converter, so each one can be tested by itself or in combination with others.
+
+=head1 METHODS
+
+=head2 C<new>
+
+Creates a new My::XML::Converter object
+
+=head2 C<input_fh>
+
+Sets the filehandle of the input XML data to the input argument, which may be a file path or an opened glob.
+
+=head2 C<output_fh>
+
+Sets the filehandle of the output XML data to the input argument, which may be a file path or an opened glob.
