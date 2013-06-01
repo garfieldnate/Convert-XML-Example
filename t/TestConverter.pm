@@ -35,10 +35,10 @@ sub parse {
 	my ($input) = shift @_;
 	my $args = Test::Base::Filter::current_arguments();
 	if($args eq ';;ALL;;'){
-		return _get_twig(undef, $input, $HANDLERS);
+		return $self->_get_twig($input, $HANDLERS);
 	}
 	my @handler_names;
-	
+
 	#get names of all handlers to be used;
 	#expand ones like ;;FONT;; to names listed in $handlerBundles
 	for my $name(split '#', $args){
@@ -49,15 +49,15 @@ sub parse {
 			push @handler_names, $name;
 		}
 	}
-	
+
 	my %handlers = map { $_ => $HANDLERS->{$_} } @handler_names;
-	return _get_twig(undef, $input, \%handlers);
+	return $self->_get_twig($input, \%handlers);
 }
 
 #returns an XML::Twig parse given the input and handlers
 sub _get_twig {
     my ( $input, $handlers ) = @_;
-	
+
     my $xml = XML::Twig->new(
 		output_encoding => 'UTF-8',
 		do_not_chain_handlers => 1, #can be important when things get complicated

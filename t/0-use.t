@@ -2,10 +2,10 @@
 
 use strict;
 use Test::More 0.88;
-plan tests => 1;
+plan tests => 2;
 my $package = 'My::XML::Converter';
 
-require $package;
+use_ok($package);
 new_ok($package);
 
 __END__
