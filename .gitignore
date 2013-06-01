@@ -1,0 +1,6 @@
+#auto-generated cruft
+perl-module.sublime-workspace
+.build
+XML-TBX-Dialect-*/
+./*.tar.gz
+t/corpus/temp.tbx
