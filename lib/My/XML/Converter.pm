@@ -12,15 +12,15 @@ use XML::Twig;
 __PACKAGE__->new->_run(@ARGV) unless caller;
 
 sub _run {
-	my ( $self, $inputFile, $outputFile, $studyNotesFile, $backMatterFile ) = @_;
-	$self->input_fh($inputFile);
-	
-	if($outputFile){
-		$self->output_fh($outputFile);
+	my ( $self, $input_file, $output_file) = @_;
+	$self->input_fh($input_file);
+
+	if($output_file){
+		$self->output_fh($output_file);
 	}else{
-		$self->output_fh("$inputFile.newXML");
+		$self->output_fh("$input_file.newXML");
 	}
-	
+
 	$self->convert();
 }
 
@@ -33,7 +33,7 @@ sub new {
 
 sub _init {
 	my ( $self, $config ) = @_;
-	
+
 	$self->{input_fh}  = \*STDIN;
 	$self->{output_fh} = \*STDOUT;
 }
@@ -85,9 +85,11 @@ sub convert {
 		keep_spaces		=> 0,
 		TwigHandlers    => $My::XML::Converter::Handlers::HANDLERS,
 	);
-	
+
 	# use handlers to process individual tags, then grab the result
 	$twig->parse( $self->input_fh );
+
+	#TODO: post-process (add JavaScript)
 	my $root = $twig->root;
 
 	# add byte order mark
@@ -110,7 +112,7 @@ __END__
 	$self->input_fh('C:/path/to/input/XML/file');
 	$converter->output_fh('C:/path/to/print/main/to');
 	$converter->convert();
-	
+
 
 =head1 DESCRIPTION
 
