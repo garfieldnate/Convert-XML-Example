@@ -1,18 +1,22 @@
+package Convert::XML::Example::Handlers;
+# VERSION
 use strict;
 use warnings;
-package My::XML::Converter::Handlers;
-use feature "state";
-use Carp qw(cluck);
-# VERSION
+use base 'Exporter';
+our @EXPORT = qw(get_handlers);
 
-our $HANDLERS = {
+my $handlers = {
 	a => sub {$_->set_tag('x')},
 	b => => sub {$_->set_tag('y')},
 	c => \&c,
-	
+
 	# might be useful
 	# ## '_default_'	=>	\&markAsTodo,
 };
+
+sub get_handlers {
+    return $handlers;
+}
 
 sub c {
 	my ( $tree, $node ) = @_;

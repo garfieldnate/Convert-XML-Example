@@ -1,8 +1,8 @@
 # ABSTRACT: Example XML dialect converter
-package My::XML::Converter;
-use My::XML::Converter::Handlers;
+package Convert::XML::Example;
 use strict;
 use warnings;
+use Convert::XML::Example::Handlers;
 
 # VERSION
 
@@ -83,7 +83,7 @@ sub convert {
 		output_encoding => 'UTF-8',
 		do_not_chain_handlers => 1, #can be important when things get complicated
 		keep_spaces		=> 0,
-		TwigHandlers    => $My::XML::Converter::Handlers::HANDLERS,
+		TwigHandlers    => get_handlers(),
 	);
 
 	# use handlers to process individual tags, then grab the result
@@ -104,11 +104,11 @@ __END__
 
 =head1 NAME
 
-	My::XML::Converter- example package for converting between two XML dialects
+	Convert::XML::Example- example package for converting between two XML dialects
 
 =head1 SYNOPSIS
 
-	my $converter = My::XML::Converter->new();
+	my $converter = Convert::XML::Example->new();
 	$self->input_fh('C:/path/to/input/XML/file');
 	$converter->output_fh('C:/path/to/print/main/to');
 	$converter->convert();
@@ -122,7 +122,7 @@ This module is meant to demonstrate one way to convert between different XML dia
 
 =head2 C<new>
 
-Creates a new My::XML::Converter object
+Creates a new Convert::XML::Example object
 
 =head2 C<input_fh>
 

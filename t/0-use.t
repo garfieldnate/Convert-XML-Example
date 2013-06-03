@@ -3,7 +3,7 @@
 use strict;
 use Test::More 0.88;
 plan tests => 2;
-my $package = 'My::XML::Converter';
+my $package = 'Convert::XML::Example';
 
 use_ok($package);
 new_ok($package);

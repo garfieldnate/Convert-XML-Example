@@ -1,6 +1,6 @@
 #test structure for a number of different elements
 #normally, you'll want to split your tests across several files
-	
+
 use t::TestConverter;
 use Test::XML;
 
@@ -26,13 +26,13 @@ __DATA__
 use three '=' to name a block
 then use three '-' to name input and expected
 Note which parsing handlers to use in the input block
-=== <a> is converter to <x>
+=== <a> is converted to <x>
 --- input parse=a
 <a>A bunch of text!</a>
 --- expected
 <x>A bunch of text!</x>
 
-=== <b> is converter to <y>
+=== <b> is converted to <y>
 --- input parse=b
 <b>A bunch of text!</b>
 --- expected

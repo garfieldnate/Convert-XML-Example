@@ -13,13 +13,13 @@ sub get_twig($%){
 }
 
 package t::TestConverter::Filter;
-use Test::Base::Filter -base;
-use My::XML::Converter;
-use My::XML::Converter::Handlers;
+use Test::Base::Filter -Base;
+use Convert::XML::Example;
+use Convert::XML::Example::Handlers;
 use Data::Dumper;
 use XML::Twig;
 use Carp;
-our $HANDLERS = $My::XML::Converter::Handlers::HANDLERS;
+my $handlers = get_handlers();
 
 #use these to specify the use of several handlers
 #note that ;;ALL;; isn't here, but it will load all available handlers
@@ -32,10 +32,11 @@ my $handlerBundles = {
 #specify several handlers with a # (pound) in between names
 #specifying ;;ALL;; as the argument will simply parse with all of the handlers
 sub parse {
-	my ($input) = shift @_;
-	my $args = Test::Base::Filter::current_arguments();
+	my ($input) = (@_);
+	# warn $input;
+	my $args = $self->current_arguments();
 	if($args eq ';;ALL;;'){
-		return $self->_get_twig($input, $HANDLERS);
+		return $self->_get_twig($input, $handlers);
 	}
 	my @handler_names;
 
@@ -50,7 +51,8 @@ sub parse {
 		}
 	}
 
-	my %handlers = map { $_ => $HANDLERS->{$_} } @handler_names;
+	my %handlers = map { $_ => $handlers->{$_} } @handler_names;
+	use Data::Dumper;
 	return $self->_get_twig($input, \%handlers);
 }
 
